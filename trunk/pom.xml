@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.googlecode.usc</groupId>
+        <artifactId>svn-folder-compression-parent</artifactId>
+        <version>0.1.0-SNAPSHOT</version>
+        <relativePath>svn-folder-compression-parent</relativePath>
+    </parent>
+    <artifactId>svn-folder-compression</artifactId>
+    <name>svn-folder-compression</name>
+    <packaging>pom</packaging>
+    <description>A Tool For Compressing Svn Folder</description>
+
+    <modules>
+		<module>svn-folder-compression-parent</module>
+        <module>svn-folder-compression-base</module>
+       <!-- <module>svn-folder-compression-app</module>
+        <module>svn-folder-compression-plugin</module>-->
+    </modules>
+
+</project>
