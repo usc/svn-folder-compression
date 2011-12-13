@@ -53,9 +53,19 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>commons-io</groupId>
+                <groupId>org.apache.commons</groupId>
                 <artifactId>commons-io</artifactId>
-                <version>2.0.1</version>
+                <version>1.3.2</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-compress</artifactId>
+                <version>1.3</version>
             </dependency>
 
 
@@ -69,14 +79,19 @@
     </dependencyManagement>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-jar-plugin</artifactId>
-                </plugin>
-            </plugins>
-        </pluginManagement>
+<!--         <pluginManagement> -->
+<!--             <plugins> -->
+<!--                 <plugin> -->
+<!--                     <groupId>org.apache.maven.plugins</groupId> -->
+<!--                     <artifactId>maven-shade-plugin</artifactId> -->
+<!--                     <version>1.5</version> -->
+<!--                 </plugin> -->
+<!--                 <plugin> -->
+<!--                     <groupId>org.apache.maven.plugins</groupId> -->
+<!--                     <artifactId>maven-jar-plugin</artifactId> -->
+<!--                 </plugin> -->
+<!--             </plugins> -->
+<!--         </pluginManagement> -->
 
         <plugins>
             <plugin>
