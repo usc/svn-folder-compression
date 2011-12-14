@@ -1,6 +1,7 @@
 package com.googlecode.usc.svnfolder.compression;
 
 import java.io.File;
+import java.util.List;
 
 /**
  *
@@ -13,7 +14,7 @@ public class Context {
         this.strategy = strategy;
     }
 
-    public void doCompress(File[] files, File out) {
-        this.strategy.doCompress(files, out);
+    public void doCompress(File[] files, File out, List<String> excludedKeys) {
+        this.strategy.doCompress(files, out, excludedKeys);
     }
 }
