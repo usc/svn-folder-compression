@@ -3,11 +3,19 @@ package com.googlecode.usc.svnfolder.compression;
 /**
  *
  * @author ShunLi
+ *
+ *         http://commons.apache.org/compress/examples.html
  */
 public enum CompressionType {
     ZIP(".zip"),
-    TAR(".tar");
-    //TODO-ShunLi: add more type
+    AR(".ar"),
+    CPIO(".crio"),
+    DUMP(".dump"),
+    TAR(".tar"),
+    JAR(".jar"),
+    BZIP2(".bzip2"),
+    GZIP(".gzip"),
+    PACK200(".pak200");
 
     private String suffix;
 

@@ -90,12 +90,13 @@ public class App {
             Timer timer = new Timer();
             timer.schedule(new PrintTimerTask(), 0, 1000);
 
+            System.out.println("压缩开始，请等待");
             new Context(sf.createStrategy(compressionType)).doCompress(files, out, excludedKeys);
 
             timer.cancel();
-            System.out.println("\nCompress" + out + " completed.");
-        } else{
-            System.out.println("文件夹不存在!");
+            System.out.println("\n压缩成功，请查看 " + out);
+        } else {
+            System.out.println("文件夹不存在或者输入的是文件!");
         }
 
     }
@@ -116,7 +117,7 @@ public class App {
         List<String> excludedKeys = new ArrayList<String>();
 
         if (StringUtils.isNotBlank(excludedWords)) {
-            excludedKeys.addAll(Arrays.asList(excludedWords.split("\\s\\" + SPILT_CHAR + "\\s")));
+            excludedKeys.addAll(Arrays.asList(excludedWords.split("\\s" + SPILT_CHAR.trim() + "\\s")));
         }
 
         return excludedKeys;
