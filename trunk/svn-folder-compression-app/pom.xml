@@ -44,8 +44,13 @@
                     </execution>
                 </executions>
             </plugin>
-
+            <plugin>
+                <groupId>com.googlecode.usc</groupId>
+                <artifactId>svn-folder-compression-plugin</artifactId>
+                <version>${project.version}</version>
+            </plugin>
         </plugins>
+
     </build>
 
 </project>

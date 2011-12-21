@@ -16,7 +16,7 @@
         <module>svn-folder-compression-parent</module>
         <module>svn-folder-compression-base</module>
         <module>svn-folder-compression-app</module>
-        <!-- <module>svn-folder-compression-plugin</module> -->
+        <module>svn-folder-compression-plugin</module>
     </modules>
 
 </project>
