@@ -1,15 +1,17 @@
 package com.googlecode.usc.svnfolder.compression;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.FilenameUtils;
-import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
 import org.codehaus.plexus.util.FileUtils;
+
+import com.googlecode.usc.svnfolder.compression.utils.CompressionUtil;
 
 /**
  * compression.
@@ -44,11 +46,11 @@ public class CompressionMojo extends AbstractCompressionMojo {
      */
     private String compressionType;
     /**
-     * Excluded Words.
+     * Excluded Keys.
      *
      * @parameter
      */
-    private List<String> excludedWords = new ArrayList<String>();
+    private List<String> excludedKeys = new ArrayList<String>();
 
     /**
      * Verbose mode.
@@ -73,12 +75,12 @@ public class CompressionMojo extends AbstractCompressionMojo {
         this.compressionType = compressionType;
     }
 
-    public List<String> getExcludedWords() {
-        return excludedWords;
+    public List<String> getExcludedKeys() {
+        return excludedKeys;
     }
 
-    public void setExcludedWords(List<String> excludedWords) {
-        this.excludedWords = excludedWords;
+    public void setExcludedKeys(List<String> excludedKeys) {
+        this.excludedKeys = excludedKeys;
     }
 
     public boolean isVerbose() {
@@ -89,7 +91,7 @@ public class CompressionMojo extends AbstractCompressionMojo {
         this.verbose = verbose;
     }
 
-    @SuppressWarnings("unchecked")
+    // @SuppressWarnings("unchecked")
     public void execute() throws MojoExecutionException, MojoFailureException {
         try {
             FileUtils.forceMkdir(getGeneratedResourcesDirectory().getAbsoluteFile());
@@ -99,22 +101,31 @@ public class CompressionMojo extends AbstractCompressionMojo {
 
         String destPath = FilenameUtils.concat(getGeneratedResourcesDirectory().getAbsolutePath(), getTargetPath());
 
-        getLog().debug("destPath: " + destPath);
-        getLog().debug("getCompressionType: " + getCompressionType());
-        getLog().debug("getExcludedWords: " + getExcludedWords());
-        getLog().debug("isVerbose: " + isVerbose());
+        getLog().info("destPath: " + destPath);
+        getLog().info("getCompressionType: " + getCompressionType());
+        getLog().info("getExcludedWords: " + getExcludedKeys());
+        getLog().info("isVerbose: " + isVerbose());
+        getLog().info("Basedir: " + mavenProject.getBasedir());
 
-        List<String> projectClasspath;
-        try {
-            projectClasspath = (List<String>) mavenProject.getCompileClasspathElements();
-        } catch (DependencyResolutionRequiredException e) {
-            getLog().error("Failed in gettting classpath elements", e);
-            throw new MojoExecutionException("Failed in gettting classpath elements", e);
-        }
-        for (String path : projectClasspath) {
-            getLog().debug("path: " + path);
+        CompressionType type = CompressionType.ZIP;
+        if (getCompressionType() == null) {
+            getLog().warn("Compression Type not provided, will process default compression type(ZIP)");
+        } else {
+            type = CompressionUtil.getEnumFromString(CompressionType.class, getCompressionType());
         }
 
+        File file = mavenProject.getBasedir();
+        File[] files = file.listFiles();
+
+        if (files != null) {
+            File out = new File(destPath, FilenameUtils.getBaseName(file.getAbsolutePath()) + type.getSuffix());
+
+            StrategyFactory sf = new StrategyFactory();
+            sf.createStrategy(type);
+
+            getLog().info("Compression start, please wait");
+            new Context(sf.createStrategy(type)).doCompress(files, out, getExcludedKeys());
+            getLog().info("Compression success, please check " + out);
+        }
     }
-
 }
