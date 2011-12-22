@@ -10,7 +10,7 @@
 
     <groupId>com.googlecode.usc</groupId>
     <artifactId>folder-compression-parent</artifactId>
-    <version>0.1.1</version>
+    <version>0.1.2-SNAPSHOT</version>
     <name>folder-compression-parent</name>
     <packaging>pom</packaging>
     <description>A Tool For Compressing A Folder - Parent</description>
@@ -22,9 +22,9 @@
         </license>
     </licenses>
     <scm>
-        <connection>scm:svn:http://folder-compression.googlecode.com/svn/tags/folder-compression-0.1.1</connection>
-        <developerConnection>scm:svn:https://folder-compression.googlecode.com/svn/tags/folder-compression-0.1.1</developerConnection>
-        <url>scm:svn:https://folder-compression.googlecode.com/svn/tags/folder-compression-0.1.1</url>
+        <connection>scm:svn:http://folder-compression.googlecode.com/svn/trunk/</connection>
+        <developerConnection>scm:svn:https://folder-compression.googlecode.com/svn/trunk/</developerConnection>
+        <url>http://code.google.com/p/folder-compression/</url>
     </scm>
     <developers>
         <developer>
