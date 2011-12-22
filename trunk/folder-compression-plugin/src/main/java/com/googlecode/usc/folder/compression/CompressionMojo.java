@@ -104,11 +104,12 @@ public class CompressionMojo extends AbstractCompressionMojo {
 
         String destPath = FilenameUtils.concat(getGeneratedResourcesDirectory().getAbsolutePath(), getTargetPath());
 
-        getLog().info("destPath: " + destPath);
-        getLog().info("getCompressionType: " + getCompressionType());
-        getLog().info("getExcludedWords: " + getExcludedKeys());
-        getLog().info("isVerbose: " + isVerbose());
-        getLog().info("Basedir: " + mavenProject.getBasedir());
+        if (isVerbose()) {
+            getLog().info("DestPath: " + destPath);
+            getLog().info("CompressionType: " + getCompressionType());
+            getLog().info("ExcludedWords: " + getExcludedKeys());
+            getLog().info("Basedir: " + mavenProject.getBasedir());
+        }
 
         CompressionType type = CompressionType.ZIP;
         if (getCompressionType() == null) {

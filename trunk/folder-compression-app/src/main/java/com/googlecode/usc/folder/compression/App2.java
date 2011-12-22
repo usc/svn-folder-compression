@@ -90,7 +90,7 @@ public class App2 {
             Timer timer = new Timer();
             timer.schedule(new PrintTimerTask(), 0, 1000);
 
-            System.out.println("\nCompression is start, please wait.");
+            System.out.println("\nCompression start, please wait.");
             new Context(sf.createStrategy(type)).doCompress(files, out, excludedKeys);
 
             timer.cancel();
