@@ -44,18 +44,13 @@ public final class CompressionUtil {
         }
         // is exclude?
         if (!isExcluded(f, excludedKeys)) {
-            if (f.isFile()) {
-                map.put(name, f);
-            } else if (f.isDirectory()) {
-                File[] subFiles = f.listFiles();
+            map.put(name, f);
 
-                if (subFiles.length > 0) {
-                    for (File file : subFiles) {
-                        list(file, name, map, excludedKeys);
-                    }
-                } else { // empty directory
-                    map.put(name, f);
+            if (f.isDirectory()) {
+                for (File file : f.listFiles()) {
+                    list(file, name, map, excludedKeys);
                 }
+
             }
         }
     }
