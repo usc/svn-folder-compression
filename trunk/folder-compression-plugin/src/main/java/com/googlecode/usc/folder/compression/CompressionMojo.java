@@ -48,12 +48,20 @@ public class CompressionMojo extends AbstractCompressionMojo {
      * @parameter
      */
     private String compressionType;
+
     /**
      * Excluded Keys.
      *
      * @parameter
      */
     private List<String> excludedKeys = new ArrayList<String>();
+
+    /**
+     * Out file is Concat version?
+     *
+     * @parameter expression="${compression.concatVersion}" default-value="false"
+     */
+    private boolean concatVersion;
 
     /**
      * Verbose mode.
@@ -86,6 +94,14 @@ public class CompressionMojo extends AbstractCompressionMojo {
         this.excludedKeys = excludedKeys;
     }
 
+    public boolean isConcatVersion() {
+        return concatVersion;
+    }
+
+    public void setConcatVersion(boolean concatVersion) {
+        this.concatVersion = concatVersion;
+    }
+
     public boolean isVerbose() {
         return verbose;
     }
@@ -108,6 +124,7 @@ public class CompressionMojo extends AbstractCompressionMojo {
             getLog().info("DestPath: " + destPath);
             getLog().info("CompressionType: " + getCompressionType());
             getLog().info("ExcludedWords: " + getExcludedKeys());
+            getLog().info("ConcatVersion: " + isConcatVersion());
             getLog().info("Basedir: " + mavenProject.getBasedir());
         }
 
@@ -122,7 +139,13 @@ public class CompressionMojo extends AbstractCompressionMojo {
         File[] files = file.listFiles();
 
         if (files != null) {
-            File out = new File(destPath, FilenameUtils.getBaseName(file.getAbsolutePath()) + type.getSuffix());
+            StringBuffer outputFileName = new StringBuffer(FilenameUtils.getBaseName(file.getAbsolutePath()));
+            if (isConcatVersion()) {
+                outputFileName.append("-").append(mavenProject.getArtifact().getVersion());
+            }
+            outputFileName.append(type.getSuffix());
+
+            File out = new File(destPath, outputFileName.toString());
 
             StrategyFactory sf = new StrategyFactory();
             sf.createStrategy(type);

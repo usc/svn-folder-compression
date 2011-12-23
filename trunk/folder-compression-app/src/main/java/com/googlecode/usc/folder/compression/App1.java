@@ -19,7 +19,7 @@ public class App1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("请速来文件夹路径：");
+        System.out.print("请输入文件夹路径：");
         String folderPath = scanner.next();
 
         CompressionType[] compressionTypes = CompressionType.values();
